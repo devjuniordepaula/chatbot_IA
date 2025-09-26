@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Chatbot</title>
+</head>
+<body>
+
+    <main id="container">
+
+    </main>
+
+
+
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    
+    <!--Complicador, ele converte JSX para HTML E JS-->
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <!--single page application - SPA -->
+    <script type="text/babel">
+
+        //Comecando a Criar o chat - input de pesquisa, no caso, o input aqui deverá ser SelfClose 
+        function ChatInput () {
+            return (
+                <div>
+                    <input type="text" placeholder="Send a messeger to chatbot" size="30" />
+                    <button>Send</button>
+                </div> 
+            );
+        };
+        
+        function ChatMessege ({message, sender}) {
+
+        //     if (sender === 'robot'){
+        //         return (
+        //             <div>
+                   
+        //            <img src="./assets/robot.png" width="50" />
+        //            {message}
+
+        //         </div>
+        //         );
+        //     };
+
+            return (
+                <div>
+                    {sender === "robot" && <img src="./assets/robot.png" width="50" /> }
+                   {message}
+                   {sender === "user" && <img src="./assets/user.png" width="50" /> }
+                   
+
+                </div> 
+            );
+        };
+
+        
+
+        //Utilizando o Fragment para colocar diretamente na tag, usado geralmente para 2 ou mais
+        function App () {
+            return (
+            <>  
+             <ChatInput />
+             <ChatMessege message="Hello" sender="user"/>
+             <ChatMessege message="Hello, How can i help you?" sender="robot" />
+             <ChatMessege message="Get date today" sender="user" />
+             <ChatMessege message="Today is September 25 " sender="robot"/>
+
+            </>
+            );
+       };
+        //capitando o elemento CONTAINER na variável container //
+        const container = document.querySelector("#container");
+        // 
+        const root = ReactDOM.createRoot(container);
+
+        //Aqui estamos renderizando tudo o que há no Container//
+        root.render(<App />);
+
+
+    </script>
+</body>
+</html>
